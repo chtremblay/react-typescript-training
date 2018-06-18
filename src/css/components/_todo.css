@@ -1,0 +1,18 @@
+.todo {
+  background-image: url(https://lh4.ggpht.com/er4T35JxjGnIFYL_p7HU9G0GFwNJ2eZzt1oGloPL9RC18f_MUU4h5_wwHI6IGGKWIuw=w315);
+  background-size: 200px;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  float: left;
+  position: relative;
+  text-align: center;
+
+  p {
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 90%;
+    height: 80px;
+  }
+}

@@ -1,0 +1,13 @@
+.todo-list {
+  background: $gray-light;
+  border: 2px solid $gray;
+  margin: 1em;
+  padding: 2em;
+  min-height: 80%;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+}
