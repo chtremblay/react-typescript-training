@@ -1,17 +1,31 @@
 import * as React from 'react';
 import TodoList from './TodoList';
 import { Todo, TodoStatus } from '../models/Todo';
+import CreateTodo from './CreateTodo';
+import TodoService from '../services/TodoService';
 
-interface TodoBoardProps {
+interface TodoBoardState {
   todos: Todo[];
 }
 
-export default class TodoBoard extends React.Component<TodoBoardProps, any> {
+export default class TodoBoard extends React.Component<{}, TodoBoardState> {
+
+  todoService: TodoService = new TodoService();
+
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      todos: this.todoService.getAllTodos(),
+    };
+  }
 
   render(): React.ReactNode {
     return (
-      <div className="todo-board">
-        {this.getTodoLists()}
+      <div>
+        <CreateTodo onCreateTodo={todoDescription => this.createTodo(todoDescription)} />
+        <div className="todo-board">
+          {this.getTodoLists()}
+        </div>
       </div>
     );
   }
@@ -21,9 +35,15 @@ export default class TodoBoard extends React.Component<TodoBoardProps, any> {
       <TodoList
         key={index}
         title={TodoStatus[status]}
-        todos={this.props.todos.filter(todo => todo.status === TodoStatus[status])}
+        todos={this.state.todos.filter(todo => todo.status === TodoStatus[status])}
       />
     ));
   }
 
+  private createTodo(todoDescription) {
+    this.todoService.createTodo({ description: todoDescription } as Todo);
+    this.setState({
+      todos: this.todoService.getAllTodos(),
+    });
+  }
 }
