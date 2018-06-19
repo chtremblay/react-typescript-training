@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
 
 module.exports = {
   watch: true,
@@ -32,6 +34,11 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  serve: {
+    add: (app) => {
+      app.use(convert(history()));
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

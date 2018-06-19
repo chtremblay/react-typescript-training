@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TodoList from './TodoList';
 import { Todo, TodoStatus } from '../models/Todo';
-import CreateTodo from './CreateTodo';
 import TodoService from '../services/TodoService';
 
 interface TodoBoardState {
@@ -10,7 +9,7 @@ interface TodoBoardState {
 
 export default class TodoBoard extends React.Component<{}, TodoBoardState> {
 
-  todoService: TodoService = new TodoService();
+  todoService: TodoService = TodoService.getInstance();
 
   constructor(props: {}) {
     super(props);
@@ -22,7 +21,6 @@ export default class TodoBoard extends React.Component<{}, TodoBoardState> {
   render(): React.ReactNode {
     return (
       <div>
-        <CreateTodo onCreateTodo={todoDescription => this.handleCreateTodo(todoDescription)} />
         <div className="todo-board">
           {this.getTodoLists()}
         </div>
@@ -39,11 +37,6 @@ export default class TodoBoard extends React.Component<{}, TodoBoardState> {
         onTodoStatusChange={(todoId, newStatus) => this.handleTodoStatusChange(todoId, newStatus)}
       />
     ));
-  }
-
-  private handleCreateTodo(todoDescription) {
-    this.todoService.createTodo({ description: todoDescription } as Todo);
-    this.reloadTodos();
   }
 
   private reloadTodos() {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TodoStatus } from '../models/Todo';
+import { Link } from 'react-router-dom';
 
 interface TodoProps {
   id: number;
@@ -15,6 +16,7 @@ export default class Todo extends React.Component<TodoProps, any> {
       <div className="todo">
         <p>{this.props.description}</p>
         {this.getStatusSelect()}
+        <Link to={`/todos/${this.props.id}`}>Edit</Link>
       </div>
     );
   }

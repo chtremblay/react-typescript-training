@@ -2,6 +2,12 @@ import { Todo, TodoStatus } from '../models/Todo';
 
 export default class TodoService {
 
+  private static instance = new TodoService();
+
+  static getInstance() {
+    return TodoService.instance;
+  }
+
   sequence: number = 6;
   todos: Todo[] = [
     {
@@ -43,9 +49,20 @@ export default class TodoService {
   }
 
   updateTodoStatus(todoId: number, status: TodoStatus): void {
-    const todo = this.todos.find(todo => todo.id === todoId);
+    const todo = this.getTodoById(todoId);
     if (todo) {
       todo.status = status;
+    }
+  }
+
+  getTodoById(todoId: number) {
+    return this.todos.find(todo => todo.id === todoId);
+  }
+
+  updateTodoDescription(todoId: number, description: string) {
+    const todo = this.getTodoById(todoId);
+    if (todo) {
+      todo.description = description;
     }
   }
 }
