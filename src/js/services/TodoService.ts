@@ -42,4 +42,10 @@ export default class TodoService {
     this.sequence += 1;
   }
 
+  updateTodoStatus(todoId: number, status: TodoStatus): void {
+    const todo = this.todos.find(todo => todo.id === todoId);
+    if (todo) {
+      todo.status = status;
+    }
+  }
 }

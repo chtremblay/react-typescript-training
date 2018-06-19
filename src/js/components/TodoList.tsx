@@ -1,10 +1,11 @@
 import * as React from 'react';
 import Todo from './Todo';
-import { Todo as TodoModel } from '../models/Todo';
+import { Todo as TodoModel, TodoStatus } from '../models/Todo';
 
 interface TodoListProps {
   title: string;
   todos: TodoModel[];
+  onTodoStatusChange: (todoId: number, newStatus: TodoStatus) => void;
 }
 
 export default class TodoList extends React.Component<TodoListProps, any> {
@@ -19,8 +20,16 @@ export default class TodoList extends React.Component<TodoListProps, any> {
   }
 
   private getTodos() {
-    return this.props.todos.map((todo, index) => (
-      <Todo key={index} {...todo} />
+    return this.props.todos.map((todo: TodoModel, index) => (
+      <Todo
+        key={index}
+        onStatusChange={(todoId, newStatus) => this.handleTodoStatusChange(todoId, newStatus)}
+        {...todo}
+      />
     ));
+  }
+
+  private handleTodoStatusChange(todoId: number, newStatus: TodoStatus) {
+    this.props.onTodoStatusChange(todoId, newStatus);
   }
 }

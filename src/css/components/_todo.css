@@ -15,4 +15,10 @@
     font-size: 90%;
     height: 80px;
   }
+
+  select {
+    width: 60%;
+    position: relative;
+    top: 50px;
+  }
 }
