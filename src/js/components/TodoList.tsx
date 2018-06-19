@@ -1,23 +1,26 @@
 import * as React from 'react';
 import Todo from './Todo';
+import { Todo as TodoModel } from '../models/Todo';
 
-export default class TodoList extends React.Component<any, any> {
+interface TodoListProps {
+  title: string;
+  todos: TodoModel[];
+}
 
-  private getTodos(number) {
-    console.log(number);
-    const result = Array(number).fill(0).map((value, index) => {
-      return (<Todo key={index} />);
-    });
-    console.log(result);
-    return result;
-  }
+export default class TodoList extends React.Component<TodoListProps, any> {
 
-  public render() {
+  render() {
     return (
-      <div className="todoList">
-        {this.getTodos(Math.floor(Math.random() * 10))}
-      </div>
+      <section className="todo-list grid__item grid__item--1-3">
+        <h1>{this.props.title}</h1>
+        {this.getTodos()}
+      </section>
     );
   }
 
+  private getTodos() {
+    return this.props.todos.map((todo, index) => (
+      <Todo key={index} {...todo} />
+    ));
+  }
 }

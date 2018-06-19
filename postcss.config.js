@@ -5,9 +5,9 @@ module.exports = {
     'cssnano': {},
     'css-mqpacker': {},
     'postcss-color-function': {},
-    'postcss-import': {},
     'postcss-mixins': {},
     'postcss-nested': {},
+    'postcss-extend': {},
     'postcss-pxtorem': {
       root_value: 16,
       unit_precision: 5,

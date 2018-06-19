@@ -3,8 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   watch: true,
+  devtool: 'cheap-module-eval-source-map',
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
-  entry: ['./src/index.tsx', './src/css/style.css'],
+  entry: ['./src/js/index.tsx', './src/css/style.css'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
